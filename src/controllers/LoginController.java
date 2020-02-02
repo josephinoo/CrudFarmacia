@@ -43,6 +43,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button btnSignin;
 
+
     /// -- 
     Connection con = null;
     PreparedStatement preparedStatement = null;
@@ -64,7 +65,6 @@ public class LoginController implements Initializable {
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/OnBoard.fxml")));
                     stage.setScene(scene);
                     stage.show();
-
                 } catch (IOException ex) {
                     System.err.println(ex.getMessage());
                 }
@@ -92,21 +92,19 @@ public class LoginController implements Initializable {
     //we gonna use string to check for status
     private String logIn() {
         String status = "Success";
-        String email = txtUsername.getText();
-        String password = txtPassword.getText();
-        if(email.isEmpty() || password.isEmpty()) {
+        String CI = txtUsername.getText();
+        if(CI.isEmpty() ) {
             setLblError(Color.TOMATO, "Empty credentials");
             status = "Error";
         } else {
             //query
-            String sql = "SELECT * FROM admins Where email = ? and password = ?";
+            String sql = "SELECT * FROM Empleado Where CI = ?";
             try {
                 preparedStatement = con.prepareStatement(sql);
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, password);
+                preparedStatement.setString(1, CI);
                 resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
-                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
+                    setLblError(Color.TOMATO, "Enter Correct CI");
                     status = "Error";
                 } else {
                     setLblError(Color.GREEN, "Login Successful..Redirecting..");

@@ -21,7 +21,7 @@ public class ConnectionUtil {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Javimarc", "root", "rootroot");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Javimarc", "root", "Joseph1998");
             System.out.println("Estoy adentro");
             return con;
         } catch (ClassNotFoundException | SQLException ex) {
